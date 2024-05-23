@@ -1,10 +1,8 @@
-<script setup lang="ts">
-import UserInfo from '@/components/signup/userInfo/UserInfo.vue';
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <main class="container pa-2">
-    <UserInfo />
+    <RouterView />
   </main>
 </template>
 

@@ -21,6 +21,10 @@ npm init vue@latest
 npm i -D sass sass-loader
 ```
 
+- vue-router
+```
+npm i vue-router
+```
 
 ---
 
