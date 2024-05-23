@@ -16,6 +16,11 @@ npm init vue@latest
 
 ![img.png](img.png)
 
+- scss
+```
+npm i -D sass sass-loader
+```
+
 
 ---
 

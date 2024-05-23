@@ -1,0 +1,35 @@
+@function getPaddingSize($num) {
+  @if ($num == 0) {
+    @return 0;
+  } @else if ($num == 1) {
+    @return 4px;
+  } @else if ($num == 2) {
+    @return 8px;
+  } @else if ($num == 3) {
+    @return 12px;
+  } @else if ($num == 4) {
+    @return 16px;
+  } @else if ($num == 5) {
+    @return 20px;
+  } @else if ($num == 5) {
+    @return 24px;
+  }
+}
+
+@function getMarginSize($num) {
+  @if ($num == 0) {
+    @return 0;
+  } @else if ($num == 1) {
+    @return 4px;
+  } @else if ($num == 2) {
+    @return 8px;
+  } @else if ($num == 3) {
+    @return 12px;
+  } @else if ($num == 4) {
+    @return 16px;
+  } @else if ($num == 5) {
+    @return 20px;
+  } @else if ($num == 5) {
+    @return 24px;
+  }
+}

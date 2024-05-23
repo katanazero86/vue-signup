@@ -1,0 +1,56 @@
+@import '../functions/index';
+
+@mixin generatePadding() {
+  @for $i from 0 to 6 {
+    .pa-#{$i} {
+      padding: getPaddingSize($i);
+    }
+    .pl-#{$i} {
+      padding-left: getPaddingSize($i);
+    }
+    .pr-#{$i} {
+      padding-right: getPaddingSize($i);
+    }
+    .pt-#{$i} {
+      padding-top: getPaddingSize($i);
+    }
+    .pb-#{$i} {
+      padding-bottom: getPaddingSize($i);
+    }
+    .px-#{$i} {
+      padding: 0 getPaddingSize($i);
+    }
+    .py-#{$i} {
+      padding: getPaddingSize($i) 0;
+    }
+  }
+}
+
+@mixin generateMargin() {
+  @for $i from 0 to 6 {
+    .ma-#{$i} {
+      margin: getMarginSize($i);
+    }
+    .ml-#{$i} {
+      margin-left: getMarginSize($i);
+    }
+    .mr-#{$i} {
+      margin-right: getMarginSize($i);
+    }
+    .mt-#{$i} {
+      margin-top: getMarginSize($i);
+    }
+    .mb-#{$i} {
+      margin-bottom: getMarginSize($i);
+    }
+    .mx-#{$i} {
+      margin: 0 getMarginSize($i);
+    }
+    .my-#{$i} {
+      margin: getMarginSize($i) 0;
+    }
+  }
+  .m-auto {
+    margin: auto;
+  }
+}
