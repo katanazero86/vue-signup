@@ -11,10 +11,10 @@ const { buttonName, isFull } = withDefaults(defineProps<BasicButtonProps>(), {
 });
 
 const buttonWidth = computed(() => (isFull ? '100%' : 'auto'));
-const emit = defineEmits(['onClick']);
+const emits = defineEmits(['onClick']);
 
 const handleClick = () => {
-  emit('onClick');
+  emits('onClick');
 };
 </script>
 
