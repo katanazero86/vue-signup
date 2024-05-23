@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, defineProps, withDefaults } from 'vue';
 
-const { buttonName, isFull } = defineProps({
-  buttonName: {
-    type: String,
-    required: true,
-  },
-  isFull: {
-    type: Boolean,
-    default: false,
-  },
+interface BasicButtonProps {
+  buttonName: string;
+  isFull?: boolean;
+}
+
+const { buttonName, isFull } = withDefaults(defineProps<BasicButtonProps>(), {
+  isFull: false,
 });
 
 const buttonWidth = computed(() => (isFull ? '100%' : 'auto'));
