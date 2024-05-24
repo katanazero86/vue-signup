@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useSignupStore } from '@/store/signup';
 import { useSignup } from '@/composables/useSignup';
 import SignupFormContainer from '@/pages/signup/SignupFormContainer.vue';
 import BasicButton from '@/components/atoms/buttons/BasicButton.vue';
@@ -10,9 +11,10 @@ import DaumPostCodeModal from '@/components/modals/daumPostCodeModal/DaumPostCod
 import { type VueDaumPostcodeCompleteResult } from 'vue-daum-postcode';
 import { validPhone } from '@/utils/validate.utils';
 
+const signupStore = useSignupStore();
 const router = useRouter();
 
-const { userAddress } = useSignup();
+const { userAddress } = useSignup(signupStore.state);
 
 const handleComplete = (result: VueDaumPostcodeCompleteResult) => {
   userAddress.value.zipcode = result.zonecode;
@@ -46,6 +48,10 @@ const handleNextClick = () => {
     alert('phone is not valid');
     return;
   }
+
+  signupStore.actionUserAddress({
+    ...userAddress.value,
+  });
 };
 
 const nameInput = ref<typeof BasicInput | null>(null);

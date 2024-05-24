@@ -8,10 +8,11 @@ import SignupFormContainer from '@/pages/signup/SignupFormContainer.vue';
 import SignupFormTitle from '@/pages/signup/SignupFormTitle.vue';
 import PasswordRequirements from '@/pages/signup/PasswordRequirements.vue';
 import { validEmail, validPassword } from '@/utils/validate.utils';
+import { useSignupStore } from '@/store/signup';
 
+const signupStore = useSignupStore();
 const router = useRouter();
-
-const { userInfo } = useSignup();
+const { userInfo } = useSignup(signupStore.state);
 const isOpenRequirements = ref(false);
 
 const handleNextClick = () => {
@@ -41,6 +42,10 @@ const handleNextClick = () => {
     alert('confirm password is not valid');
     return;
   }
+
+  signupStore.actionUserInfo({
+    ...userInfo.value,
+  });
 
   router.push('/signup/user-address');
 };

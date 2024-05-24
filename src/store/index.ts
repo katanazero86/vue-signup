@@ -2,12 +2,12 @@ import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
 export const useRootStore = defineStore('rootStore', () => {
-  const rootState = ref({
+  const state = ref({
     test: 'rootTest',
   });
   const updateTest = (payload: string) => {
-    rootState.value.test = payload;
+    state.value.test = payload;
   };
-  const getTest = computed(() => rootState.value.test);
-  return { rootState, updateTest, getTest };
+  const getTest = computed(() => state.value.test);
+  return { state, updateTest, getTest };
 });

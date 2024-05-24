@@ -1,18 +1,13 @@
 import { ref } from 'vue';
+import type { SignupState, UserInfo, UserAddress } from '@/store/signup';
 
-export const useSignup = () => {
-  const userInfo = ref({
-    email: '',
-    password: '',
-    confirmPassword: '',
+export const useSignup = (initValue: SignupState) => {
+  const userInfo = ref<UserInfo>({
+    ...initValue.userInfo,
   });
 
-  const userAddress = ref({
-    name: '',
-    phone: '',
-    zipcode: '',
-    address: '',
-    addressDetail: '',
+  const userAddress = ref<UserAddress>({
+    ...initValue.userAddress,
   });
 
   return {
