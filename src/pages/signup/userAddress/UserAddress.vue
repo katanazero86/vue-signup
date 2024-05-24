@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { onBeforeMount, onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSignupStore } from '@/store/signup';
 import { useSignup } from '@/composables/useSignup';
+import { useConfirmLeave } from '@/composables/useConfirmLeave';
 import SignupFormContainer from '@/pages/signup/SignupFormContainer.vue';
 import BasicButton from '@/components/atoms/buttons/BasicButton.vue';
 import SignupFormTitle from '@/pages/signup/SignupFormTitle.vue';
-import BasicInput from '@/components/atoms/inputs/BasicInput.vue';
+import BasicInput from '@/components/atoms/inputs/basicInput/BasicInput.vue';
 import DaumPostCodeModal from '@/components/modals/daumPostCodeModal/DaumPostCodeModal.vue';
 import { type VueDaumPostcodeCompleteResult } from 'vue-daum-postcode';
 import { validPhone } from '@/utils/validate.utils';
-import { useConfirmLeave } from '@/composables/useConfirmLeave';
 
 const signupStore = useSignupStore();
 const router = useRouter();
@@ -53,6 +53,8 @@ const handleNextClick = () => {
   signupStore.actionUserAddress({
     ...userAddress.value,
   });
+
+  router.push('/signup/user-payment');
 };
 
 useConfirmLeave();
@@ -79,7 +81,7 @@ onMounted(() => {
     </div>
     <div class="input-row">
       <p>연락처</p>
-      <BasicInput v-model.trim="userAddress.phone" isNumber placeholder="010 1234 5678" />
+      <BasicInput v-model.trim="userAddress.phone" isPhone placeholder="010 1234 5678" />
     </div>
     <div class="input-row">
       <p>주소</p>
@@ -91,7 +93,7 @@ onMounted(() => {
       <BasicInput v-model="userAddress.addressDetail" :disabled="!userAddress.zipcode" />
     </div>
     <div class="buttons mt-4">
-      <BasicButton button-name="이전" is-full @onClick="handlePrevClick" />
+      <BasicButton buttonName="이전" isFull @onClick="handlePrevClick" />
       <BasicButton
         buttonName="다음"
         isFull

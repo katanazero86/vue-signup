@@ -7,14 +7,14 @@ interface BasicInputProps {
   type?: InputType;
   modelValue: string;
   disabled?: boolean;
-  isNumber?: boolean;
+  isPhone?: boolean;
   placeholder?: string;
 }
 
 const props = withDefaults(defineProps<BasicInputProps>(), {
   type: 'text',
   disabled: false,
-  isNumber: false,
+  isPhone: false,
   placeholder: '',
 });
 
@@ -25,7 +25,7 @@ const emits = defineEmits(['update:modelValue', 'onFocus', 'onBlur']);
 const handleInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
   let value = target.value;
-  if (props.isNumber) value = value.replace(/[^0-9 -]/g, '');
+  if (props.isPhone) value = value.replace(/[^0-9 -]/g, '');
   emits('update:modelValue', value);
   target.value = value;
 };

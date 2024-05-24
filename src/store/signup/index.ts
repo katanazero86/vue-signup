@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { defineStore } from 'pinia';
 
 export interface UserInfo {
   email: string;
@@ -16,7 +16,11 @@ export interface UserAddress {
 }
 
 export interface UserPayment {
-  cardNumber: number;
+  cardNumber: string;
+  numberGroup1: string;
+  numberGroup2: string;
+  numberGroup3: string;
+  numberGroup4: string;
 }
 
 export interface SignupState {
@@ -40,7 +44,11 @@ export const useSignupStore = defineStore('signupStore', () => {
       addressDetail: '',
     },
     userPayment: {
-      cardNumber: 0,
+      cardNumber: '',
+      numberGroup1: '',
+      numberGroup2: '',
+      numberGroup3: '',
+      numberGroup4: '',
     },
   });
 
@@ -52,9 +60,14 @@ export const useSignupStore = defineStore('signupStore', () => {
     state.value.userAddress = payload;
   };
 
+  const actionUserPayment = (payload: UserPayment) => {
+    state.value.userPayment = payload;
+  };
+
   return {
     state,
     actionUserInfo,
     actionUserAddress,
+    actionUserPayment,
   };
 });

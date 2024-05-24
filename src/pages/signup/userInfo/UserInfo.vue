@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useSignupStore } from '@/store/signup';
 import { useSignup } from '@/composables/useSignup';
-import BasicInput from '@/components/atoms/inputs/BasicInput.vue';
+import BasicInput from '@/components/atoms/inputs/basicInput/BasicInput.vue';
 import BasicButton from '@/components/atoms/buttons/BasicButton.vue';
 import SignupFormContainer from '@/pages/signup/SignupFormContainer.vue';
 import SignupFormTitle from '@/pages/signup/SignupFormTitle.vue';
 import PasswordRequirements from '@/pages/signup/PasswordRequirements.vue';
 import { validEmail, validPassword } from '@/utils/validate.utils';
-import { useSignupStore } from '@/store/signup';
 
 const signupStore = useSignupStore();
 const router = useRouter();
@@ -62,7 +62,7 @@ onMounted(() => {
     <SignupFormTitle text="개인정보입력" />
     <div class="input-row">
       <p>이메일</p>
-      <BasicInput v-model.trim="userInfo.email" @keydown.prevent.space ref="emailInput" />
+      <BasicInput v-model="userInfo.email" @keydown.prevent.space ref="emailInput" />
     </div>
     <div class="input-row relative">
       <p>비밀번호</p>
@@ -81,7 +81,7 @@ onMounted(() => {
     </div>
     <BasicButton
       class="mt-4"
-      button-name="다음"
+      buttonName="다음"
       isFull
       @onClick="handleNextClick"
       :disabled="!userInfo.email || !userInfo.password || !userInfo.confirmPassword"
