@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSignup } from '@/composables/useSignup';
 import SignupFormContainer from '@/pages/signup/SignupFormContainer.vue';
@@ -7,7 +8,7 @@ import SignupFormTitle from '@/pages/signup/SignupFormTitle.vue';
 import BasicInput from '@/components/atoms/inputs/BasicInput.vue';
 import DaumPostCodeModal from '@/components/modals/daumPostCodeModal/DaumPostCodeModal.vue';
 import { type VueDaumPostcodeCompleteResult } from 'vue-daum-postcode';
-import { onMounted, ref } from 'vue';
+import { validPhone } from '@/utils/validate.utils';
 
 const router = useRouter();
 
@@ -22,7 +23,30 @@ const handlePrevClick = () => {
   router.back();
 };
 
-const handleNextClick = () => {};
+const handleNextClick = () => {
+  const { name, phone, zipcode, address } = userAddress.value;
+
+  if (name === '') {
+    alert('name is required');
+    return;
+  }
+  if (phone === '') {
+    alert('phone is required');
+    return;
+  }
+  if (zipcode === '') {
+    alert('zipcode is required');
+    return;
+  }
+  if (address === '') {
+    alert('address is required');
+    return;
+  }
+  if (!validPhone(phone)) {
+    alert('phone is not valid');
+    return;
+  }
+};
 
 const nameInput = ref<typeof BasicInput | null>(null);
 
@@ -36,11 +60,11 @@ onMounted(() => {
     <SignupFormTitle text="배송지정보입력" />
     <div class="input-row">
       <p>이름</p>
-      <BasicInput v-model="userAddress.name" ref="nameInput" />
+      <BasicInput v-model="userAddress.name" @keydown.space.prevent ref="nameInput" />
     </div>
     <div class="input-row">
       <p>연락처</p>
-      <BasicInput v-model="userAddress.phone" />
+      <BasicInput v-model.trim="userAddress.phone" isNumber placeholder="010 1234 5678" />
     </div>
     <div class="input-row">
       <p>주소</p>

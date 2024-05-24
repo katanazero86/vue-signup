@@ -9,3 +9,8 @@ export const validPassword = (targetPassword: string) => {
   );
   return passwordRegExp.test(targetPassword);
 };
+
+export const validPhone = (targetPhone: string) => {
+  const phoneRegExp = new RegExp('^0\\d{2}[ -]?\\d{3,4}[ -]?\\d{4}$');
+  return phoneRegExp.test(targetPhone);
+};

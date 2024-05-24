@@ -31,6 +31,11 @@ npm i vue-router
 npm i vue-daum-postcode
 ```
 
+- pinia
+```
+npm i pinia
+```
+
 ---
 
 # vue-signup

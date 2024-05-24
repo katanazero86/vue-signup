@@ -57,21 +57,22 @@ onMounted(() => {
     <SignupFormTitle text="개인정보입력" />
     <div class="input-row">
       <p>이메일</p>
-      <BasicInput v-model="userInfo.email" ref="emailInput" />
+      <BasicInput v-model.trim="userInfo.email" @keydown.prevent.space ref="emailInput" />
     </div>
     <div class="input-row relative">
       <p>비밀번호</p>
       <BasicInput
         type="password"
         v-model="userInfo.password"
-        @onFocus="isOpenRequirements = true"
-        @onBlur="isOpenRequirements = false"
+        @keydown.prevent.space
+        @focus="isOpenRequirements = true"
+        @blur="isOpenRequirements = false"
       />
       <PasswordRequirements v-if="isOpenRequirements" />
     </div>
     <div class="input-row">
       <p>비밀번호 확인</p>
-      <BasicInput type="password" v-model="userInfo.confirmPassword" />
+      <BasicInput type="password" v-model="userInfo.confirmPassword" @keydown.prevent.space />
     </div>
     <BasicButton
       class="mt-4"
@@ -80,6 +81,7 @@ onMounted(() => {
       @onClick="handleNextClick"
       :disabled="!userInfo.email || !userInfo.password || !userInfo.confirmPassword"
     />
+    <!--    <input v-model.trim="userInfo.confirmPassword" @keydown.space.prevent />-->
   </SignupFormContainer>
 </template>
 

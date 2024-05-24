@@ -7,11 +7,15 @@ interface BasicInputProps {
   type?: InputType;
   modelValue: string;
   disabled?: boolean;
+  isNumber?: boolean;
+  placeholder?: string;
 }
 
 const props = withDefaults(defineProps<BasicInputProps>(), {
   type: 'text',
   disabled: false,
+  isNumber: false,
+  placeholder: '',
 });
 
 // const { type, modelValue } = defineProps<BasicInputProps>();
@@ -20,16 +24,10 @@ const emits = defineEmits(['update:modelValue', 'onFocus', 'onBlur']);
 
 const handleInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
-  target.value = target.value.trim();
-  emits('update:modelValue', target.value);
-};
-
-const handleFocus = () => {
-  emits('onFocus');
-};
-
-const handleBlur = () => {
-  emits('onBlur');
+  let value = target.value;
+  if (props.isNumber) value = value.replace(/[^0-9 -]/g, '');
+  emits('update:modelValue', value);
+  target.value = value;
 };
 
 const inputRef = ref<HTMLInputElement | null>(null);
@@ -45,9 +43,8 @@ defineExpose({
     :type="type"
     :value="modelValue"
     @input="handleInput"
-    @focus="handleFocus"
-    @blur="handleBlur"
     :disabled="disabled"
+    :placeholder="placeholder"
   />
 </template>
 
