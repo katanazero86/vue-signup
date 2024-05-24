@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onBeforeMount, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSignupStore } from '@/store/signup';
 import { useSignup } from '@/composables/useSignup';
@@ -10,6 +10,7 @@ import BasicInput from '@/components/atoms/inputs/BasicInput.vue';
 import DaumPostCodeModal from '@/components/modals/daumPostCodeModal/DaumPostCodeModal.vue';
 import { type VueDaumPostcodeCompleteResult } from 'vue-daum-postcode';
 import { validPhone } from '@/utils/validate.utils';
+import { useConfirmLeave } from '@/composables/useConfirmLeave';
 
 const signupStore = useSignupStore();
 const router = useRouter();
@@ -54,9 +55,17 @@ const handleNextClick = () => {
   });
 };
 
+useConfirmLeave();
+
 const nameInput = ref<typeof BasicInput | null>(null);
 
 onMounted(() => {
+  if (signupStore.state.userInfo.email === '') {
+    alert('회원가입 첫 페이지로 이동 합니다 :)');
+    router.replace('/signup/user-info');
+    return;
+  }
+
   if (nameInput.value?.inputRef) nameInput.value?.inputRef.focus();
 });
 </script>
