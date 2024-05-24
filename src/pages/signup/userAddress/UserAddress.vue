@@ -7,6 +7,7 @@ import SignupFormTitle from '@/pages/signup/SignupFormTitle.vue';
 import BasicInput from '@/components/atoms/inputs/BasicInput.vue';
 import DaumPostCodeModal from '@/components/modals/daumPostCodeModal/DaumPostCodeModal.vue';
 import { type VueDaumPostcodeCompleteResult } from 'vue-daum-postcode';
+import { onMounted, ref } from 'vue';
 
 const router = useRouter();
 
@@ -22,6 +23,12 @@ const handlePrevClick = () => {
 };
 
 const handleNextClick = () => {};
+
+const nameInput = ref<typeof BasicInput | null>(null);
+
+onMounted(() => {
+  if (nameInput.value?.inputRef) nameInput.value?.inputRef.focus();
+});
 </script>
 
 <template>
@@ -29,7 +36,7 @@ const handleNextClick = () => {};
     <SignupFormTitle text="배송지정보입력" />
     <div class="input-row">
       <p>이름</p>
-      <BasicInput v-model="userAddress.name" />
+      <BasicInput v-model="userAddress.name" ref="nameInput" />
     </div>
     <div class="input-row">
       <p>연락처</p>

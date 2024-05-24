@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
 type InputType = 'text' | 'password';
 
 interface BasicInputProps {
@@ -29,10 +31,16 @@ const handleFocus = () => {
 const handleBlur = () => {
   emits('onBlur');
 };
+
+const inputRef = ref<HTMLInputElement | null>(null);
+defineExpose({
+  inputRef,
+});
 </script>
 
 <template>
   <input
+    ref="inputRef"
     class="basic-input pa-2"
     :type="type"
     :value="modelValue"

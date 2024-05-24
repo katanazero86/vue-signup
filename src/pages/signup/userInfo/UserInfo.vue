@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useSignup } from '@/composables/useSignup';
 import BasicInput from '@/components/atoms/inputs/BasicInput.vue';
@@ -44,6 +44,12 @@ const handleNextClick = () => {
 
   router.push('/signup/user-address');
 };
+
+const emailInput = ref<typeof BasicInput | null>(null);
+
+onMounted(() => {
+  if (emailInput.value?.inputRef) emailInput.value?.inputRef.focus();
+});
 </script>
 
 <template>
@@ -51,7 +57,7 @@ const handleNextClick = () => {
     <SignupFormTitle text="개인정보입력" />
     <div class="input-row">
       <p>이메일</p>
-      <BasicInput v-model="userInfo.email" />
+      <BasicInput v-model="userInfo.email" ref="emailInput" />
     </div>
     <div class="input-row relative">
       <p>비밀번호</p>
@@ -70,8 +76,8 @@ const handleNextClick = () => {
     <BasicButton
       class="mt-4"
       button-name="다음"
-      is-full
-      @on-click="handleNextClick"
+      isFull
+      @onClick="handleNextClick"
       :disabled="!userInfo.email || !userInfo.password || !userInfo.confirmPassword"
     />
   </SignupFormContainer>

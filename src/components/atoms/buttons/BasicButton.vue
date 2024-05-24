@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<BasicButtonProps>(), {
   disabled: false,
 });
 
-const buttonWidth = computed(() => (props.isFull ? '100%' : 'auto'));
+const btnWidth = computed(() => (props.isFull ? '100%' : 'auto'));
 const emits = defineEmits(['onClick']);
 
 const handleClick = () => {
@@ -35,7 +35,7 @@ const handleClick = () => {
   padding: 12px 18px;
   border-radius: 8px;
   border: 1px solid #4f46e5;
-  width: v-bind(buttonWidth);
+  width: v-bind(btnWidth);
 
   &:hover {
     background-color: #3730a3;
