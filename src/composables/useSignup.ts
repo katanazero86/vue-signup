@@ -7,9 +7,16 @@ export const useSignup = () => {
     confirmPassword: '',
   });
 
+  const userAddress = ref({
+    name: '',
+    phone: '',
+    zipcode: '',
+    address: '',
+    addressDetail: '',
+  });
 
   return {
     userInfo,
+    userAddress,
   };
-
 };

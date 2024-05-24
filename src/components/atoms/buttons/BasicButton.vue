@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { computed, defineProps, withDefaults } from 'vue';
+import { computed } from 'vue';
 
 interface BasicButtonProps {
   buttonName: string;
   isFull?: boolean;
+  disabled?: boolean;
 }
 
-const { buttonName, isFull } = withDefaults(defineProps<BasicButtonProps>(), {
+const props = withDefaults(defineProps<BasicButtonProps>(), {
   isFull: false,
+  disabled: false,
 });
 
-const buttonWidth = computed(() => (isFull ? '100%' : 'auto'));
+const buttonWidth = computed(() => (props.isFull ? '100%' : 'auto'));
 const emits = defineEmits(['onClick']);
 
 const handleClick = () => {
@@ -19,7 +21,7 @@ const handleClick = () => {
 </script>
 
 <template>
-  <button class="basic-button" @click="handleClick">
+  <button class="basic-button" @click="handleClick" :disabled="disabled">
     {{ buttonName }}
   </button>
 </template>
@@ -37,6 +39,12 @@ const handleClick = () => {
 
   &:hover {
     background-color: #3730a3;
+  }
+
+  &:disabled {
+    background-color: #cccccc;
+    border-color: #cccccc;
+    pointer-events: none;
   }
 }
 </style>

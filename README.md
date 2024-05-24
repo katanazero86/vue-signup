@@ -26,6 +26,11 @@ npm i -D sass sass-loader
 npm i vue-router
 ```
 
+- vue-daum-postcode
+```
+npm i vue-daum-postcode
+```
+
 ---
 
 # vue-signup

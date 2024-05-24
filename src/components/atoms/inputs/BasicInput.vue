@@ -1,27 +1,46 @@
 <script setup lang="ts">
-import { defineProps, withDefaults } from 'vue';
-
 type InputType = 'text' | 'password';
 
 interface BasicInputProps {
   type?: InputType;
   modelValue: string;
+  disabled?: boolean;
 }
 
-const { type, modelValue } = withDefaults(defineProps<BasicInputProps>(), {
+const props = withDefaults(defineProps<BasicInputProps>(), {
   type: 'text',
+  disabled: false,
 });
 
-const emits = defineEmits(['update:modelValue']);
+// const { type, modelValue } = defineProps<BasicInputProps>();
+
+const emits = defineEmits(['update:modelValue', 'onFocus', 'onBlur']);
 
 const handleInput = (e: Event) => {
   const target = e.target as HTMLInputElement;
+  target.value = target.value.trim();
   emits('update:modelValue', target.value);
+};
+
+const handleFocus = () => {
+  emits('onFocus');
+};
+
+const handleBlur = () => {
+  emits('onBlur');
 };
 </script>
 
 <template>
-  <input class="basic-input pa-2" :type="type" :value="modelValue" @input="handleInput" />
+  <input
+    class="basic-input pa-2"
+    :type="type"
+    :value="modelValue"
+    @input="handleInput"
+    @focus="handleFocus"
+    @blur="handleBlur"
+    :disabled="disabled"
+  />
 </template>
 
 <style lang="scss" scoped>
@@ -31,5 +50,9 @@ const handleInput = (e: Event) => {
   appearance: none;
   outline: none;
   width: 100%;
+
+  &:disabled {
+    background-color: #ccc;
+  }
 }
 </style>
