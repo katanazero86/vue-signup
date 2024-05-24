@@ -1,4 +1,4 @@
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
 
 export interface UserInfo {
@@ -64,10 +64,44 @@ export const useSignupStore = defineStore('signupStore', () => {
     state.value.userPayment = payload;
   };
 
+  const actionInitSignupStoreState = () => {
+    state.value = {
+      userInfo: {
+        email: '',
+        password: '',
+        confirmPassword: '',
+      },
+      userAddress: {
+        name: '',
+        phone: '',
+        zipcode: '',
+        address: '',
+        addressDetail: '',
+      },
+      userPayment: {
+        cardNumber: '',
+        numberGroup1: '',
+        numberGroup2: '',
+        numberGroup3: '',
+        numberGroup4: '',
+      },
+    };
+  };
+
+  const isCompleted = computed(() => {
+    return (
+      state.value.userInfo.email !== '' &&
+      state.value.userAddress.name !== '' &&
+      state.value.userPayment.cardNumber !== ''
+    );
+  });
+
   return {
     state,
     actionUserInfo,
     actionUserAddress,
     actionUserPayment,
+    actionInitSignupStoreState,
+    isCompleted,
   };
 });

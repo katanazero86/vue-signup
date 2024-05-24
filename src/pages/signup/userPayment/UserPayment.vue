@@ -49,7 +49,7 @@ const handleCompleteClick = () => {
     cardNumber,
   });
 
-  router.push('/signup/complete');
+  router.replace('/signup/complete');
 };
 
 useConfirmLeave();
