@@ -74,9 +74,15 @@ src/App.vue: Vue 웹앱 최상위 컴포넌트(Root Component)
 src/main.ts: Vue 웹앱 진입 파일(Entry File)
 
 - 실행 방법   
-package.json scripts 속성 참조
+package.json scripts 속성 참조   
+Nodejs 와 npm 이 설치가 되어 있어야 합니다 :)   
+  (https://nodejs.org/en/download/package-manager/current) 
 
 ```
+// dependency install
+npm i
+
+// devMode 
 npm run dev
 
 // build
