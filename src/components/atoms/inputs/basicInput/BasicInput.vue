@@ -18,8 +18,6 @@ const props = withDefaults(defineProps<BasicInputProps>(), {
   placeholder: '',
 });
 
-// const { type, modelValue } = defineProps<BasicInputProps>();
-
 const emits = defineEmits(['update:modelValue', 'onFocus', 'onBlur']);
 
 const handleInput = (e: Event) => {

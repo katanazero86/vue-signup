@@ -9,6 +9,7 @@ import SignupFormContainer from '@/pages/signup/SignupFormContainer.vue';
 import SignupFormTitle from '@/pages/signup/SignupFormTitle.vue';
 import PasswordRequirements from '@/pages/signup/PasswordRequirements.vue';
 import { validEmail, validPassword } from '@/utils/validate.utils';
+import Parent from "@/components/Parent.vue";
 
 const signupStore = useSignupStore();
 const router = useRouter();
@@ -86,7 +87,6 @@ onMounted(() => {
       @onClick="handleNextClick"
       :disabled="!userInfo.email || !userInfo.password || !userInfo.confirmPassword"
     />
-    <!--    <input v-model.trim="userInfo.confirmPassword" @keydown.space.prevent />-->
   </SignupFormContainer>
 </template>
 
