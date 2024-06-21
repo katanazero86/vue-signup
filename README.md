@@ -1,6 +1,5 @@
-## vue-signup
+## vue-signup-assignment
 ⭕
-- 발땡 코딩 과제
 
 - Vue3 를 이용하여 제작한 회원가입 페이지
 - 회원 가입 페이지는 총 3단계로 구성이 되어있다.
